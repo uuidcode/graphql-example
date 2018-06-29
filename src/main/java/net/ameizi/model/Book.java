@@ -1,32 +1,23 @@
 package net.ameizi.model;
 
-import java.io.Serializable;
-
-public class Book implements Serializable {
-    private Long id;
+public class Book extends CoreObject<Book> {
+    private Long bookId;
     private String title;
     private String isbn;
     private Long pageCount;
-    private Author author;
+    private Long authorId;
 
-    public static Book of() {
-        return new Book();
+    public Long getBookId() {
+        return this.bookId;
     }
 
-    public Book() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Book setId(Long id) {
-        this.id = id;
+    public Book setBookId(Long bookId) {
+        this.bookId = bookId;
         return this;
     }
 
     public String getTitle() {
-        return title;
+        return this.title;
     }
 
     public Book setTitle(String title) {
@@ -35,7 +26,7 @@ public class Book implements Serializable {
     }
 
     public String getIsbn() {
-        return isbn;
+        return this.isbn;
     }
 
     public Book setIsbn(String isbn) {
@@ -44,7 +35,7 @@ public class Book implements Serializable {
     }
 
     public Long getPageCount() {
-        return pageCount;
+        return this.pageCount;
     }
 
     public Book setPageCount(Long pageCount) {
@@ -52,12 +43,16 @@ public class Book implements Serializable {
         return this;
     }
 
-    public Author getAuthor() {
-        return author;
+    public Long getAuthorId() {
+        return this.authorId;
     }
 
-    public Book setAuthor(Author author) {
-        this.author = author;
+    public Book setAuthorId(Long authorId) {
+        this.authorId = authorId;
         return this;
+    }
+
+    public static Book of() {
+        return new Book();
     }
 }

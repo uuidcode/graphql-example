@@ -1,0 +1,95 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.ameizi.dao.BookDao">
+    <select id="select"
+        parameterType="java.lang.Long"
+        resultType="net.ameizi.model.Book">
+        select * from book
+        where 1 = 1
+        and book_id = #{bookId}
+    </select>
+
+    <sql id="fromAndWhere">
+        from book
+        where 1 = 1
+    </sql>
+
+    <select id="selectList"
+        parameterType="net.ameizi.model.Book"
+        resultType="net.ameizi.model.Book">
+        select * 
+        <include refid="fromAndWhere"/>
+        order by book_id desc
+    </select>
+
+    <select id="selectCount"
+        parameterType="net.ameizi.model.Book"
+        resultType="java.lang.Long">
+        select count(*) 
+        <include refid="fromAndWhere"/>
+    </select>
+
+    <select id="selectListForPayload"
+        parameterType="net.ameizi.model.Book"
+        resultType="net.ameizi.model.Book">
+        select * 
+        <include refid="fromAndWhere"/>
+        order by book_id desc
+        limit #{start}, #{count}
+    </select>
+
+    <select id="selectCountForPayload"
+        parameterType="net.ameizi.model.Book"
+        resultType="java.lang.Integer">
+        select count(*) 
+        <include refid="fromAndWhere"/>
+    </select>
+
+    <insert id="insert"
+        parameterType="net.ameizi.model.Book">
+        insert into book
+        (
+            title,
+            isbn,
+            pageCount,
+            author_id
+        )
+        values
+        (
+            #{title},
+            #{isbn},
+            #{pageCount},
+            #{authorId}
+        )
+        <selectKey keyProperty="bookId"
+            resultType="java.lang.Long"
+            order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <update id="update"
+        parameterType="net.ameizi.model.Book">
+        update book set
+            title = #{title},
+            isbn = #{isbn},
+            pageCount = #{pageCount},
+            author_id = #{authorId}
+        where 1 = 1
+        and book_id = #{bookId}
+    </update>
+
+    <delete id="delete"
+        parameterType="java.lang.Long">
+        delete from book
+        where 1 = 1
+        and book_id = #{bookId}
+    </delete>
+
+    <delete id="deleteForBatch"
+        parameterType="net.ameizi.model.Book">
+        delete from book
+        where 1 = 1
+    </delete>
+</mapper>

@@ -1,4 +1,4 @@
-package net.ameizi.config;
+package net.ameizi.configuration;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Date;

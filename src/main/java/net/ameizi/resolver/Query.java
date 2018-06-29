@@ -1,35 +1,36 @@
 package net.ameizi.resolver;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+
+import net.ameizi.dao.AuthorDao;
+import net.ameizi.dao.BookDao;
 import net.ameizi.model.Author;
 import net.ameizi.model.Book;
-import net.ameizi.repository.AuthorRepository;
-import net.ameizi.repository.BookRepository;
 
+@Service
 public class Query implements GraphQLQueryResolver {
+    @Autowired
+    private BookDao bookDao;
 
-    private BookRepository bookRepository;
-
-    private AuthorRepository authorRepository;
-
-    public Query(AuthorRepository authorRepository, BookRepository bookRepository) {
-        this.authorRepository = authorRepository;
-        this.bookRepository = bookRepository;
-    }
+    @Autowired
+    private AuthorDao authorDao;
 
     public Iterable<Book> findAllBooks() {
-        return bookRepository.findAll();
+        return this.bookDao.selectList(Book.of());
     }
 
     public Iterable<Author> findAllAuthors() {
-        return authorRepository.findAll();
+        return this.authorDao.selectList(Author.of());
     }
 
     public Long countBooks() {
-        return bookRepository.count();
+        return this.bookDao.selectCount(Book.of());
     }
 
     public Long countAuthors() {
-        return authorRepository.count();
+        return this.authorDao.selectCount(Author.of());
     }
 }

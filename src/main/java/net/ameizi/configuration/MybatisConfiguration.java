@@ -1,4 +1,4 @@
-package net.ameizi.config;
+package net.ameizi.configuration;
 
 import javax.sql.DataSource;
 

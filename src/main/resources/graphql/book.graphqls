@@ -3,7 +3,6 @@ type Book {
     title: String!
     isbn: String!
     pageCount: Int
-    author: Author
 }
 
 extend type Query {

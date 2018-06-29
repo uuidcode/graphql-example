@@ -1,34 +1,30 @@
 package net.ameizi.model;
 
-import java.io.Serializable;
-
-public class Author implements Serializable{
-    private Long id;
-    private String firstName;
+public class Author extends CoreObject<Author> {
+    private Long authorId;
     private String lastName;
+    private String firstName;
 
-    public static Author of() {
-        return new Author();
+    public Long getAuthorId() {
+        return this.authorId;
     }
 
-    public Author() {
+    public Author setAuthorId(Long authorId) {
+        this.authorId = authorId;
+        return this;
     }
 
-    public Author(Long id) {
-        this.id = id;
+    public String getLastName() {
+        return this.lastName;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public Author setId(Long id) {
-        this.id = id;
+    public Author setLastName(String lastName) {
+        this.lastName = lastName;
         return this;
     }
 
     public String getFirstName() {
-        return firstName;
+        return this.firstName;
     }
 
     public Author setFirstName(String firstName) {
@@ -36,12 +32,7 @@ public class Author implements Serializable{
         return this;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public Author setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
+    public static Author of() {
+        return new Author();
     }
 }

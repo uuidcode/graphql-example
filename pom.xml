@@ -26,12 +26,20 @@
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.graphql-java</groupId>
             <artifactId>graphql-spring-boot-starter</artifactId>
@@ -96,14 +104,9 @@
             <version>5.2.8.Final</version>
         </dependency>
         <dependency>
-            <groupId>com.github.jknack</groupId>
-            <artifactId>handlebars</artifactId>
-            <version>4.0.3</version>
-        </dependency>
-        <dependency>
             <groupId>pl.allegro.tech.boot</groupId>
             <artifactId>handlebars-spring-boot-starter</artifactId>
-            <version>0.2.16</version>
+            <version>0.2.0</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -208,6 +211,11 @@
             <artifactId>spring-jdbc</artifactId>
             <version>4.3.16.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.reactivestreams</groupId>
+            <artifactId>reactive-streams</artifactId>
+            <version>1.0.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -218,5 +226,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

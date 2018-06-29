@@ -1,49 +1,48 @@
 package net.ameizi.resolver;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 
+import net.ameizi.dao.AuthorDao;
+import net.ameizi.dao.BookDao;
 import net.ameizi.model.Author;
 import net.ameizi.model.Book;
-import net.ameizi.repository.AuthorRepository;
-import net.ameizi.repository.BookRepository;
 
+@Service
 public class Mutation implements GraphQLMutationResolver {
+    @Autowired
+    private BookDao bookDao;
 
-    private BookRepository bookRepository;
-    private AuthorRepository authorRepository;
-
-    public Mutation(AuthorRepository authorRepository, BookRepository bookRepository) {
-        this.authorRepository = authorRepository;
-        this.bookRepository = bookRepository;
-    }
+    @Autowired
+    private AuthorDao authorDao;
 
     public Author newAuthor(String firstName, String lastName) {
         Author author = new Author();
         author.setFirstName(firstName);
         author.setLastName(lastName);
-        authorRepository.save(author);
+        this.authorDao.insert(author);
         return author;
     }
 
-    public Book newBook(String title, String isbn, Integer pageCount, Long authorId) {
-        Book book = new Book();
-        book.setAuthor(new Author(authorId));
-        book.setTitle(title);
-        book.setIsbn(isbn);
-        book.setPageCount(pageCount != null ? pageCount : 0L);
-        bookRepository.save(book);
-        return book;
+    public Book newBook(String title, String isbn, Long pageCount, Long authorId) {
+        return Book.of()
+            .setTitle(title)
+            .setIsbn(isbn)
+            .setPageCount(pageCount)
+            .setAuthorId(authorId);
     }
 
-    public boolean deleteBook(Long id) {
-        bookRepository.delete(id);
+    public boolean deleteBook(Long bookId) {
+        this.bookDao.delete(bookId);
         return true;
     }
 
-    public Book updateBookPageCount(Long pageCount, Long id) {
-        Book book = bookRepository.findOne(id);
+    public Book updateBookPageCount(Long bookId, Long pageCount) {
+        Book book = this.bookDao.select(bookId);
         book.setPageCount(pageCount);
-        bookRepository.save(book);
+        this.bookDao.update(book);
         return book;
     }
 }
