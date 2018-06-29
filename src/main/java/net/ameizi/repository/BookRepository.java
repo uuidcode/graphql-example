@@ -1,20 +1,17 @@
 package net.ameizi.repository;
 
-import net.ameizi.model.Author;
-import net.ameizi.model.Book;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import net.ameizi.model.Book;
 
 @Component
 public class BookRepository {
 
     public Iterable<Book> findAll() {
         List<Book> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new Book("java程序设计","1259589331",1344,new Author("Gosling","James")));
-        }
         return list;
     }
 
@@ -31,6 +28,6 @@ public class BookRepository {
     }
 
     public Book findOne(Long id) {
-        return new Book("java程序设计","1259589331",1344,new Author("Gosling","James"));
+        return new Book();
     }
 }

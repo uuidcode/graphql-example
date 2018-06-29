@@ -8,3 +8,6 @@ graphiql:
   mapping: /graphiql
   endpoint: /graphql
   enabled: true
+
+server:
+  port: 6565

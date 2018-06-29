@@ -3,76 +3,61 @@ package net.ameizi.model;
 import java.io.Serializable;
 
 public class Book implements Serializable {
-
     private Long id;
-
     private String title;
-
     private String isbn;
-
-    private int pageCount;
-
+    private Long pageCount;
     private Author author;
 
-    public Book() {
+    public static Book of() {
+        return new Book();
     }
 
-    public Book(String title, String isbn, int pageCount, Author author) {
-        this.title = title;
-        this.isbn = isbn;
-        this.pageCount = pageCount;
-        this.author = author;
+    public Book() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Book setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
+    public Book setTitle(String title) {
         this.title = title;
+        return this;
     }
 
     public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(String isbn) {
+    public Book setIsbn(String isbn) {
         this.isbn = isbn;
+        return this;
     }
 
-    public int getPageCount() {
+    public Long getPageCount() {
         return pageCount;
     }
 
-    public void setPageCount(int pageCount) {
+    public Book setPageCount(Long pageCount) {
         this.pageCount = pageCount;
+        return this;
     }
 
     public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author author) {
+    public Book setAuthor(Author author) {
         this.author = author;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", isbn='" + isbn + '\'' +
-                ", pageCount=" + pageCount +
-                ", author=" + author +
-                '}';
+        return this;
     }
 }

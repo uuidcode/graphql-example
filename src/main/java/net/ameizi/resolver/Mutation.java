@@ -1,7 +1,7 @@
 package net.ameizi.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import net.ameizi.exception.BookNotFoundException;
+
 import net.ameizi.model.Author;
 import net.ameizi.model.Book;
 import net.ameizi.repository.AuthorRepository;
@@ -30,7 +30,7 @@ public class Mutation implements GraphQLMutationResolver {
         book.setAuthor(new Author(authorId));
         book.setTitle(title);
         book.setIsbn(isbn);
-        book.setPageCount(pageCount != null ? pageCount : 0);
+        book.setPageCount(pageCount != null ? pageCount : 0L);
         bookRepository.save(book);
         return book;
     }
@@ -40,11 +40,8 @@ public class Mutation implements GraphQLMutationResolver {
         return true;
     }
 
-    public Book updateBookPageCount(Integer pageCount, Long id) {
+    public Book updateBookPageCount(Long pageCount, Long id) {
         Book book = bookRepository.findOne(id);
-        if(book == null) {
-            throw new BookNotFoundException("The book to be updated was found", id);
-        }
         book.setPageCount(pageCount);
         bookRepository.save(book);
         return book;

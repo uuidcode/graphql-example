@@ -1,19 +1,17 @@
 package net.ameizi.repository;
 
-import net.ameizi.model.Author;
-import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.stereotype.Component;
+
+import net.ameizi.model.Author;
 
 @Component
 public class AuthorRepository {
 
     public Iterable<Author> findAll() {
         List<Author> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(new Author("Gosling","James"));
-        }
         return list;
     }
 
@@ -26,6 +24,6 @@ public class AuthorRepository {
     }
 
     public Author findOne(Long id) {
-        return new Author("Gosling","James");
+        return new Author();
     }
 }
